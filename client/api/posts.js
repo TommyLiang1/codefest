@@ -7,13 +7,18 @@ export const postPost = info =>
     .then(handleSuccess)
     .catch(handleError);
 
-export const getPosts = () =>
+export const getPost = () =>
   request.get('/api/posts')
     .then(handleSuccess)
     .catch(handleError);
 
+export const getPosts = () =>
+  request.get('/api/posts')
+    .then(handleSuccess)
+    .catch(handleError)
+
 export const putToggleCompletePost = info =>
-  request.put('/api/posts/completepost')
+  request.put('/api/posts/complete')
     .send(info)
     .then(handleSuccess)
     .catch(handleError);

@@ -1,77 +1,109 @@
-const express = require('express');
-const { requireAuth } = require('./middleware');
-const { Post } = require('../database/schemas');
+const express = require("express");
+const { requireAuth } = require("./middleware");
+const { Post } = require("../database/schemas");
 
-const router   = express.Router();
+const router = express.Router();
 
 module.exports = router;
 
-router.get('/', requireAuth, (req, res) => {
-    Post.find({ user: req.user.id }, { __v: 0, user: 0 }, (err, posts) => {
+// retrieve a specific post by post id
+router.get("/:id", requireAuth, (req, res) => {
+  Post.findById(req.params.id)
+    .populate("comments")
+    .exec(function (err, results) {
+      if (err) {
+        res.status(400).send({ message: "Get post add failed", err });
+      } else {
+        res.send({ message: "Posts retrieved successfully", post: results });
+      }
+    });
+});
+
+// retrieve all posts
+router.get("/", requireAuth, (req, res) => {
+  Post.find({ user: req.user.id }, { __v: 0, user: 0 }, (err, posts) => {
     if (err) {
-      res.status(400).send({ message: 'Get posts failed', err });
+      res.status(400).send({ message: "Get posts failed", err });
     } else {
-      res.send({ message: 'Posts retrieved successfully', posts });
+      res.send({
+        message: "Posts retrieved successfully",
+        posts,
+        comments: posts.comments,
+      });
     }
   });
 });
 
-router.post('/', requireAuth, (req, res) => {
+// router.get('/id', requireAuth, (req, res) => {
+//   const id = req.params.id;
+//   const postRelated = await Post.findById(id);
+//   Post.find({ user: req.user.id }, { __v: 0, user: 0 }, (err, postRelated) => {
+//   if (err) {
+//     res.status(400).send({ message: 'Get posts failed', err });
+//   } else {
+//     res.send({ message: 'Posts retrieved successfully', postRelated });
+//   }
+// });
+// });
+
+router.post("/", requireAuth, (req, res) => {
   req.body.user = req.user.id;
 
   const newPost = Post(req.body);
 
   newPost.save((err, savedPost) => {
     if (err) {
-      res.status(400).send({ message: 'Create post failed', err });
+      res.status(400).send({ message: "Create post failed", err });
     } else {
-      res.send({ message: 'Post created successfully', post: savedPost });
+      res.send({ message: "Post created successfully", post: savedPost });
     }
   });
 });
 
-
-router.put('/complete', requireAuth, (req, res) => {
+router.put("/complete", requireAuth, (req, res) => {
   Post.findById(req.body.id, { __v: 0, user: 0 }, (err, post) => {
     if (err) {
-      res.status(400).send({ message: 'Toggle post failed', err });
+      res.status(400).send({ message: "Toggle post failed", err });
     } else {
       post.completed = !post.completed;
       post.save((err, savedPost) => {
         if (err) {
-          res.status(400).send({ message: 'Toggle post failed', err });
+          res.status(400).send({ message: "Toggle post failed", err });
         } else {
-          res.send({ message: 'Toggled complete post successfully', post: savedPost });
+          res.send({
+            message: "Toggled complete post successfully",
+            post: savedPost,
+          });
         }
       });
     }
   });
 });
 
-router.put('/', requireAuth, (req, res) => {
+router.put("/", requireAuth, (req, res) => {
   Post.findById(req.body.id, { __v: 0, user: 0 }, (err, post) => {
     if (err) {
-      res.status(400).send({ message: 'Update post failed', err });
+      res.status(400).send({ message: "Update post failed", err });
     } else {
       post.text = req.body.text;
       post.updated_at = Date.now();
       post.save((err, savedPost) => {
         if (err) {
-          res.status(400).send({ message: 'Update post failed', err });
+          res.status(400).send({ message: "Update post failed", err });
         } else {
-          res.send({ message: 'Updated post successfully', post: savedPost });
+          res.send({ message: "Updated post successfully", post: savedPost });
         }
       });
     }
   });
 });
 
-router.delete('/', requireAuth, (req, res) => {
-  Post.findByIdAndRemove(req.body.id, err => {
+router.delete("/", requireAuth, (req, res) => {
+  Post.findByIdAndRemove(req.body.id, (err) => {
     if (err) {
-      res.status(400).send({ message: 'Delete post failed', err });
+      res.status(400).send({ message: "Delete post failed", err });
     } else {
-      res.send({ message: 'Post successfully delete' });
+      res.send({ message: "Post successfully delete" });
     }
   });
 });
