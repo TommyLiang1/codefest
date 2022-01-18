@@ -9,13 +9,26 @@ module.exports = router;
 
 // get all users comments
 router.get("/", requireAuth, (req, res) => {
-  Comment.find({ user: req.user.id }, { __v: 0, user: 0 }, (err, comments) => {
+  Comment.find({ user: req.user.id }, (err, comments) => {
     if (err) {
       res.status(400).send({ message: "Get users failed", err });
     } else {
       res.send({ message: "Comment retrieved successfully", comments });
     }
   });
+});
+
+// get a comment by comment id
+router.get("/:id/find", requireAuth, (req, res) => {
+  Comment.findOne({ _id: req.params.id })
+    .populate("text")
+    .exec(function (err, comments) {
+      if (err) {
+        res.status(400).send({ message: "Get users failed", err });
+      } else {
+        res.send({ message: "Comment retrieved successfully", comments });
+      }
+    });
 });
 
 // get comments under a post
@@ -28,7 +41,8 @@ router.get("/:id", requireAuth, (req, res) => {
       } else {
         res.send({
           message: "Comments retrieved successfully",
-          post: results,
+          post: results.text,
+          comments: results.comments,
         });
       }
     });
@@ -36,31 +50,30 @@ router.get("/:id", requireAuth, (req, res) => {
 
 router.post("/:id", requireAuth, (req, res) => {
   req.body.user = req.user.id;
-  const id = req.params.id;
   const newComment = new Comment({
+    user: req.user.id,
     text: req.body.text,
-    post: id,
+    post: req.params.id,
   });
 
   newComment.save();
-  var postRelated = Post.findById(id);
-  // push the comment into the post.comments array
-  // if (Array.isArray(postRelated.comments)) {
-  postRelated.comments.push(newComment);
-  // } else {
-  //   postRelated.comments = [newComment];
-  // }
 
-  postRelated.save((err, savedComment) => {
-    if (err) {
-      res.status(400).send({ message: "Create comment failed", err });
-    } else {
-      res.send({
-        message: "Comment created successfully",
-        comments: savedComment.comments,
-      });
-    }
-  });
+  Post.findById(req.params.id)
+    .populate("comments")
+    .exec(function (err, results) {
+      if (err) {
+        res
+          .status(400)
+          .send({ message: "Comment couldn't be associated", err });
+      } else {
+        results.comments.push(newComment);
+        results.save();
+        res.send({
+          message: "Comment has been associated.",
+          post: results,
+        });
+      }
+    });
 });
 
 router.put("/:id", requireAuth, (req, res) => {

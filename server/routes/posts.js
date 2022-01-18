@@ -21,30 +21,19 @@ router.get("/:id", requireAuth, (req, res) => {
 
 // retrieve all posts
 router.get("/", requireAuth, (req, res) => {
-  Post.find({ user: req.user.id }, { __v: 0, user: 0 }, (err, posts) => {
-    if (err) {
-      res.status(400).send({ message: "Get posts failed", err });
-    } else {
-      res.send({
-        message: "Posts retrieved successfully",
-        posts,
-        comments: posts.comments,
-      });
-    }
-  });
+  Post.find({ user: req.user.id })
+    .populate("comments")
+    .exec(function (err, posts) {
+      if (err) {
+        res.status(400).send({ message: "Get posts failed", err });
+      } else {
+        res.send({
+          message: "Posts retrieved successfully",
+          posts,
+        });
+      }
+    });
 });
-
-// router.get('/id', requireAuth, (req, res) => {
-//   const id = req.params.id;
-//   const postRelated = await Post.findById(id);
-//   Post.find({ user: req.user.id }, { __v: 0, user: 0 }, (err, postRelated) => {
-//   if (err) {
-//     res.status(400).send({ message: 'Get posts failed', err });
-//   } else {
-//     res.send({ message: 'Posts retrieved successfully', postRelated });
-//   }
-// });
-// });
 
 router.post("/", requireAuth, (req, res) => {
   req.body.user = req.user.id;

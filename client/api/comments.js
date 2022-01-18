@@ -8,6 +8,9 @@ export const postComments = (info) =>
     .then(handleSuccess)
     .catch(handleError);
 
+export const getComment = () =>
+  request.get("/api/comments").then(handleSuccess).catch(handleError);
+
 export const getUsersComments = () =>
   request.get("/api/comments").then(handleSuccess).catch(handleError);
 
