@@ -7,6 +7,7 @@ const users        = require('./users');
 const todos        = require('./todos');
 const posts        = require('./posts');
 const comments     = require('./comments');
+const reports      = require('./reports');
 
 
 const router = express.Router();
@@ -17,6 +18,7 @@ router.use('/api/users', users);
 router.use('/api/todos', todos);
 router.use('/api/posts', posts);
 router.use('/api/comments', comments);
+router.use('/api/reports', reports);
 
 router.get('/api/tags', (req, res) => {
   res.send([

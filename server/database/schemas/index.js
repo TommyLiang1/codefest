@@ -3,8 +3,7 @@ const User = require('./User');
 const Todo = require('./Todo');
 const Post = require('./Post');
 const Comment = require('./Comment');
-
-
+const Report = require('./Report');
 
 module.exports = {
   Session,
@@ -12,4 +11,5 @@ module.exports = {
   Todo,
   Post,
   Comment,
+  Report,
 };

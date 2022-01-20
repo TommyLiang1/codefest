@@ -57,17 +57,19 @@ router.post("/:id", requireAuth, (req, res) => {
   });
 
   newComment.save();
+  //console.log(newComment);
 
-  Post.findById(req.params.id)
-    .populate("comments")
+  Post.findByIdAndUpdate(req.params.id, { $push: { comments: newComment._id } })
     .exec(function (err, results) {
+  // Post.findById(req.params.id)
+  // .populate("comments")
       if (err) {
         res
           .status(400)
           .send({ message: "Comment couldn't be associated", err });
       } else {
-        results.comments.push(newComment);
-        results.save();
+        //results.comments.push(newComment._id);
+        //results.save();
         res.send({
           message: "Comment has been associated.",
           post: results,
@@ -113,6 +115,16 @@ router.put("/:id", requireAuth, (req, res) => {
           });
         }
       });
+    }
+  });
+});
+
+router.delete("/", requireAuth, (req, res) => {
+  Comment.findByIdAndRemove(req.body.id, (err) => {
+    if (err) {
+      res.status(400).send({ message: "Delete comment failed", err });
+    } else {
+      res.send({ message: "Comment successfully delete" });
     }
   });
 });

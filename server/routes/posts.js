@@ -44,7 +44,7 @@ router.post("/", requireAuth, (req, res) => {
     if (err) {
       res.status(400).send({ message: "Create post failed", err });
     } else {
-      res.send({ message: "Post created successfully", post: savedPost });
+      res.send({ message: "Post created successfully", post: savedPost});
     }
   });
 });

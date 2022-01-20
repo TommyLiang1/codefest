@@ -9,13 +9,22 @@ export const postComments = (info) =>
     .catch(handleError);
 
 export const getComment = () =>
-  request.get("/api/comments").then(handleSuccess).catch(handleError);
+  request
+    .get("/api/comments")
+    .then(handleSuccess)
+    .catch(handleError);
 
 export const getUsersComments = () =>
-  request.get("/api/comments").then(handleSuccess).catch(handleError);
+  request
+    .get("/api/comments")
+    .then(handleSuccess)
+    .catch(handleError);
 
 export const getPostsComments = () =>
-  request.get("/api/comments").then(handleSuccess).catch(handleError);
+  request
+    .get("/api/comments")
+    .then(handleSuccess)
+    .catch(handleError);
 
 export const putToggleCompleteComments = (info) =>
   request
