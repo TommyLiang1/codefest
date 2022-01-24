@@ -31,10 +31,10 @@ export default function Navigation({ pathname }) {
       ? pathname === "/home"
       : R.slice(0, 6, pathname) === "/home/";
 
-  const isTodo =
-    pathname.length === 5
-      ? pathname === "/todo"
-      : R.slice(0, 6, pathname) === "/todo/";
+  // const isTodo =
+  //   pathname.length === 5
+  //     ? pathname === "/todo"
+  //     : R.slice(0, 6, pathname) === "/todo/";
 
   const isSettings =
     pathname.length === 9
