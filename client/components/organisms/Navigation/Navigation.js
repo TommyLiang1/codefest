@@ -1,19 +1,19 @@
-import React, { useState, useEffect }  from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import R from 'ramda';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import R from "ramda";
 
-import Navbar from 'react-bulma-companion/lib/Navbar';
-import Container from 'react-bulma-companion/lib/Container';
-import Image from 'react-bulma-companion/lib/Image';
-import Title from 'react-bulma-companion/lib/Title';
-import Button from 'react-bulma-companion/lib/Button';
+import Navbar from "react-bulma-companion/lib/Navbar";
+import Container from "react-bulma-companion/lib/Container";
+import Image from "react-bulma-companion/lib/Image";
+import Title from "react-bulma-companion/lib/Title";
+import Button from "react-bulma-companion/lib/Button";
 
-import UserDropdown from '_molecules/UserDropdown';
+import UserDropdown from "_molecules/UserDropdown";
 
 export default function Navigation({ pathname }) {
-  const { user } = useSelector(R.pick(['user']));
+  const { user } = useSelector(R.pick(["user"]));
 
   const [auth, setAuth] = useState(!R.isEmpty(user));
   const [open, setOpen] = useState(false);
@@ -26,30 +26,31 @@ export default function Navigation({ pathname }) {
 
   const closeDropdown = () => setOpen(false);
 
-  const isHome = (pathname.length === 5)
-    ? pathname === '/home'
-    : R.slice(0, 6, pathname) === '/home/';
+  const isHome =
+    pathname.length === 5
+      ? pathname === "/home"
+      : R.slice(0, 6, pathname) === "/home/";
 
-  const isTodo = (pathname.length === 5)
-    ? pathname === '/todo'
-    : R.slice(0, 6, pathname) === '/todo/';
+  const isTodo =
+    pathname.length === 5
+      ? pathname === "/todo"
+      : R.slice(0, 6, pathname) === "/todo/";
 
-  const isSettings = (pathname.length === 9)
-    ? pathname === '/settings'
-    : R.slice(0, 10, pathname) === '/settings/';
+  const isSettings =
+    pathname.length === 9
+      ? pathname === "/settings"
+      : R.slice(0, 10, pathname) === "/settings/";
 
   return (
     <Navbar fixed="top" shadow>
       <Container>
         <Navbar.Brand>
           <Navbar.Item
-            to={auth ? '/home' : '/'}
+            to={auth ? "/home" : "/"}
             aria-label="main navigation"
             component={Link}
           >
-            <Title className="logo" size="3">
-              MERN Boilerplate
-            </Title>
+            <Title className="logo">Codefest</Title>
           </Navbar.Item>
           <div className="navbar-brand-right">
             {!auth && (
@@ -58,9 +59,7 @@ export default function Navigation({ pathname }) {
                 to="/login"
                 component={Link}
               >
-                <Title size="6">
-                  Login
-                </Title>
+                <Title size="6">Login</Title>
               </Navbar.Item>
             )}
             {!auth && (
@@ -83,7 +82,7 @@ export default function Navigation({ pathname }) {
                 <Image size="32x32">
                   <Image.Content
                     className="profile-img"
-                    src={user.profilePic || '/images/default-profile.png'}
+                    src={user.profilePic || "/images/default-profile.png"}
                   />
                 </Image>
                 <span className="dropdown-caret" />
@@ -94,7 +93,7 @@ export default function Navigation({ pathname }) {
 
         {auth ? (
           <Navbar.Menu>
-            <Navbar.Start>
+            <Navbar.Start className="nav-links">
               <Navbar.Item
                 className="is-hidden-mobile"
                 to="/home"
@@ -102,18 +101,19 @@ export default function Navigation({ pathname }) {
                 tab
                 component={Link}
               >
-                <Title size="6">Home</Title>
+                <Title>Inbox</Title>
               </Navbar.Item>
-              <Navbar.Item
+              {/* <Navbar.Item
                 className="is-hidden-mobile"
                 to="/todo"
                 active={isTodo}
                 tab
                 component={Link}
               >
-                <Title size="6">
-                  Todo
-                </Title>
+                <Title>Todo</Title>
+              </Navbar.Item> */}
+              <Navbar.Item>
+                <Title>Make a Post</Title>
               </Navbar.Item>
               <Navbar.Item
                 className="is-hidden-mobile"
@@ -122,17 +122,20 @@ export default function Navigation({ pathname }) {
                 tab
                 component={Link}
               >
-                <Title size="6">
-                  Settings
-                </Title>
+                <Title>My Account</Title>
               </Navbar.Item>
             </Navbar.Start>
             <Navbar.End>
-              <Navbar.Item onClick={toggleDropdown} onKeyPress={toggleDropdown} hoverable component="a">
+              <Navbar.Item
+                onClick={toggleDropdown}
+                onKeyPress={toggleDropdown}
+                hoverable
+                component="a"
+              >
                 <Image size="32x32">
                   <Image.Content
                     className="profile-img"
-                    src={user.profilePic || '/images/default-profile.png'}
+                    src={user.profilePic || "/images/default-profile.png"}
                   />
                 </Image>
                 <span className="dropdown-caret" />
@@ -143,9 +146,7 @@ export default function Navigation({ pathname }) {
           <Navbar.Menu>
             <Navbar.End>
               <Navbar.Item to="/login" component={Link}>
-                <Title size="6">
-                  Login
-                </Title>
+                <Title size="6">Login</Title>
               </Navbar.Item>
               <Navbar.Item to="/register" component={Link}>
                 <Button color="success">Sign Up</Button>
