@@ -36,12 +36,12 @@ export default function WelcomePage() {
           <Columns>
             <Column size="half">
               <div className="moto">
-                <p className="moto1">Express your concerns</p>
-                <p className="moto2">
+                <p id="moto1">Express your concerns</p>
+                <p id="moto2">
                   Foster a safe space and uplift the community by responding to
                   anonymous letters online.
                 </p>
-                <button>Get Started</button>
+                <button id="getstarted">Get Started</button>
               </div>
             </Column>
             <Column>

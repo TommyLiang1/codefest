@@ -13,7 +13,28 @@ img {
   width: 100px;
 }
 
-button {
+#respond {
   display: block;
   margin: auto;
+  border: none;
+  border-radius: 20px;
+  font-size: 2rem;
+  background-color: rgba(98, 68, 52, 1);
+  padding: 0.75rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  color: white;
+}
+
+#question {
+  display: flex;
+  font-size: 2rem;
+  margin: auto;
+  margin-top: 100px;
+
+  justify-content: center;
+}
+
+#readposts {
+  background-color: beige;
 }
