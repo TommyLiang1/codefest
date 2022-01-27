@@ -19,21 +19,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div>
-      <div id = "lr">
-        <img src = "/images/left-arrow.png"/>
-        <div>
-          Hello World!
-          {/* {this.state.loading ? <div>loading...</div> : <div>person...</div>} */}
-        </div>
-        <img src = "/images/right-arrow.png"/>
-      </div>
-
-      <a href = "../MakePost/MakePost.js">  
-        <button>Respond</button>
-      </a>
-      
-    </div>
+    <div></div>
     /*
     <div className="home-page">
       <Section>

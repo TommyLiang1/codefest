@@ -35,6 +35,15 @@ export default function Navigation({ pathname }) {
   //   pathname.length === 5
   //     ? pathname === "/todo"
   //     : R.slice(0, 6, pathname) === "/todo/";
+  const isReadPost =
+    pathname.length === 9
+      ? pathname === "/readpost"
+      : R.slice(0, 10, pathname) === "/readpost/";
+
+  const isMakePost =
+    pathname.length === 9
+      ? pathname === "/makepost"
+      : R.slice(0, 10, pathname) === "/makepost/";
 
   const isSettings =
     pathname.length === 9
@@ -112,8 +121,23 @@ export default function Navigation({ pathname }) {
               >
                 <Title>Todo</Title>
               </Navbar.Item> */}
-              <Navbar.Item>
-                <Title>Make a Post</Title>
+              <Navbar.Item
+                className="is-hidden-mobile"
+                to="/readpost"
+                active={isReadPost}
+                tab
+                component={Link}
+              >
+                <Title>Read Posts</Title>
+              </Navbar.Item>
+              <Navbar.Item
+                className="is-hidden-mobile"
+                to="/makepost"
+                active={isMakePost}
+                tab
+                component={Link}
+              >
+                <Title>Make Post</Title>
               </Navbar.Item>
               <Navbar.Item
                 className="is-hidden-mobile"
