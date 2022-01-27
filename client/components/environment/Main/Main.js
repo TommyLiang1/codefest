@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import R from "ramda";
 
 import { attemptGetUser } from "_thunks/user";
+import { attemptGetPosts } from "_thunks/posts";
 
 import WelcomePage from "_pages/WelcomePage";
 import LoginPage from "_pages/LoginPage";
@@ -30,6 +31,10 @@ export default function Main({ location }) {
     dispatch(attemptGetUser())
       .then(() => subscribed && setLoading(false))
       .catch(R.identity);
+
+    // dispatch(attemptGetPosts())
+    //   .then(() => subscribed)
+    //   .catch(R.identity);
 
     return () => {
       subscribed = false;

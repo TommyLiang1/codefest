@@ -31,11 +31,9 @@ export default function ReadPost() {
     !loading && (
       <div>
         <div id="lr">
-          <img src="/images/left-arrow.png" />
           <div>
-            <Route path="*" component={ReadPosts} />
+            <ReadPosts />
           </div>
-          <img src="/images/right-arrow.png" />
         </div>
         <button id="respond">Respond</button>
       </div>

@@ -23,12 +23,22 @@ import Post from "_molecules/Post";
 
 export default function ReadPosts() {
   const dispatch = useDispatch();
+  const [index, setIndex] = useState(0);
   const { user } = useSelector(R.pick(["user"]));
   const { posts } = useSelector(R.pick(["posts"]));
+  const currentPost = posts.length == 0 ? { _id: 0 } : posts[index];
   console.log(posts);
   return (
-    <Box className="readposts">
-      <div>{posts[0]}</div>
-    </Box>
+    <div>
+      <Button onClick={() => setIndex(Math.max(index - 1, 0))}>
+        <img src="/images/left-arrow.png" />
+      </Button>
+      <Box className="readposts">
+        <Post key={currentPost._id} {...currentPost} />
+      </Box>
+      <Button onClick={() => setIndex(Math.min(index + 1, posts.length - 1))}>
+        <img src="/images/right-arrow.png" />
+      </Button>
+    </div>
   );
 }

@@ -23,11 +23,16 @@ const fromNow = (date) =>
 
 export default function Post({
   id,
+  user,
   text,
   tags,
+  user_visibility,
+  comm_visibility,
+  exp_visibility,
   completed,
-  createdAt,
-  updatedAt,
+  created_at,
+  updated_at,
+  comments,
 }) {
   const dispatch = useDispatch();
 
@@ -38,8 +43,8 @@ export default function Post({
   const [createdMessage, setCreatedMessage] = useState("");
 
   const updateMessages = () => {
-    setUpdatedMessage(updatedAt ? fromNow(updatedAt) : "");
-    setCreatedMessage(fromNow(createdAt));
+    // setUpdatedMessage(updated_at ? fromNow(updated_at) : "");
+    // setCreatedMessage(fromNow(created_at));
   };
 
   useEffect(() => {
@@ -47,7 +52,7 @@ export default function Post({
     const interval = window.setInterval(updateMessages, 1000);
 
     return () => clearInterval(interval);
-  }, [updatedAt]);
+  }, [updated_at]);
 
   const openModal = () => setConfirm(true);
   const closeModal = () => setConfirm(false);
@@ -103,7 +108,7 @@ export default function Post({
 
           <nav className="level is-mobile">
             <div className="level-left">
-              {!!updatedAt && <small>{`edited ${updatedMessage}`}</small>}
+              {!!updated_at && <small>{`edited ${updatedMessage}`}</small>}
             </div>
             <div className="level-right">
               {edit ? (
@@ -144,24 +149,24 @@ export default function Post({
           </nav>
         </div>
       </article>
-      <ConfirmModal
-        confirm={confirm}
-        closeModal={closeModal}
-        deletePost={deletePost}
-      />
     </li>
   );
 }
 
 Post.propTypes = {
   id: PropTypes.string.isRequired,
+  user: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   tags: PropTypes.string.isRequired,
+  user_visibility: PropTypes.bool,
+  comm_visibility: PropTypes.bool,
+  exp_visibility: PropTypes.bool,
   completed: PropTypes.bool.isRequired,
-  createdAt: PropTypes.string.isRequired,
-  updatedAt: PropTypes.string,
+  created_at: PropTypes.string.isRequired,
+  updated_at: PropTypes.string,
+  comments: PropTypes.array.isRequired,
 };
 
 Post.defaultProps = {
-  updatedAt: null,
+  updated_at: null,
 };
