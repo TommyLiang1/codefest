@@ -1,20 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { parseISO, formatDistanceToNow } from 'date-fns';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { parseISO, formatDistanceToNow } from "date-fns";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons/faTrashAlt';
-import { faBan } from '@fortawesome/free-solid-svg-icons/faBan';
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons/faPencilAlt';
-import { faSave } from '@fortawesome/free-solid-svg-icons/faSave';
-import { faSquare } from '@fortawesome/free-regular-svg-icons/faSquare';
-import { faCheckSquare } from '@fortawesome/free-regular-svg-icons/faCheckSquare';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons/faTrashAlt";
+import { faBan } from "@fortawesome/free-solid-svg-icons/faBan";
+import { faPencilAlt } from "@fortawesome/free-solid-svg-icons/faPencilAlt";
+import { faSave } from "@fortawesome/free-solid-svg-icons/faSave";
+import { faSquare } from "@fortawesome/free-regular-svg-icons/faSquare";
+import { faCheckSquare } from "@fortawesome/free-regular-svg-icons/faCheckSquare";
 
-import { attemptToggleCompleteTodo, attemptUpdateTodo, attemptDeleteTodo } from '_thunks/todos';
-import ConfirmModal from '_organisms/ConfirmModal';
+import {
+  attemptToggleCompleteTodo,
+  attemptUpdateTodo,
+  attemptDeleteTodo,
+} from "_thunks/todos";
+import ConfirmModal from "_organisms/ConfirmModal";
 
-const fromNow = date => formatDistanceToNow(parseISO(date), { addSuffix: true });
+const fromNow = (date) =>
+  formatDistanceToNow(parseISO(date), { addSuffix: true });
 
 export default function Todo({ id, text, completed, createdAt, updatedAt }) {
   const dispatch = useDispatch();
@@ -22,11 +27,11 @@ export default function Todo({ id, text, completed, createdAt, updatedAt }) {
   const [currentText, setCurrentText] = useState(text);
   const [edit, setEdit] = useState(false);
   const [confirm, setConfirm] = useState(false);
-  const [updatedMessage, setUpdatedMessage] = useState('');
-  const [createdMessage, setCreatedMessage] = useState('');
+  const [updatedMessage, setUpdatedMessage] = useState("");
+  const [createdMessage, setCreatedMessage] = useState("");
 
   const updateMessages = () => {
-    setUpdatedMessage(updatedAt ? fromNow(updatedAt) : '');
+    setUpdatedMessage(updatedAt ? fromNow(updatedAt) : "");
     setCreatedMessage(fromNow(createdAt));
   };
 
@@ -39,7 +44,7 @@ export default function Todo({ id, text, completed, createdAt, updatedAt }) {
 
   const openModal = () => setConfirm(true);
   const closeModal = () => setConfirm(false);
-  const updateText = e => setCurrentText(e.target.value);
+  const updateText = (e) => setCurrentText(e.target.value);
   const editTodo = () => setEdit(true);
 
   const cancelEdit = () => {
@@ -49,8 +54,7 @@ export default function Todo({ id, text, completed, createdAt, updatedAt }) {
 
   const handleUpdateTodo = () => {
     if (currentText) {
-      dispatch(attemptUpdateTodo(id, currentText))
-        .then(() => setEdit(false));
+      dispatch(attemptUpdateTodo(id, currentText)).then(() => setEdit(false));
     }
   };
 
@@ -62,18 +66,22 @@ export default function Todo({ id, text, completed, createdAt, updatedAt }) {
     <li className="todo box">
       <article className="media">
         <figure className="media-left">
-          <span className="icon" onClick={toggleCompleteTodo} onKeyPress={toggleCompleteTodo}>
-            {completed
-              ? <FontAwesomeIcon icon={faCheckSquare} size="lg" />
-              : <FontAwesomeIcon icon={faSquare} size="lg" />}
+          <span
+            className="icon"
+            onClick={toggleCompleteTodo}
+            onKeyPress={toggleCompleteTodo}
+          >
+            {completed ? (
+              <FontAwesomeIcon icon={faCheckSquare} size="lg" />
+            ) : (
+              <FontAwesomeIcon icon={faSquare} size="lg" />
+            )}
           </span>
         </figure>
         <div className="media-content">
           <div className="content">
             <p>
-              <small>
-                {`created ${createdMessage}`}
-              </small>
+              <small>{`created ${createdMessage}`}</small>
             </p>
             {edit ? (
               <textarea
@@ -82,36 +90,46 @@ export default function Todo({ id, text, completed, createdAt, updatedAt }) {
                 onChange={updateText}
               />
             ) : (
-              <p>
-                {text}
-              </p>
+              <p>{text}</p>
             )}
           </div>
 
           <nav className="level is-mobile">
             <div className="level-left">
-              {!!updatedAt && (
-                <small>
-                  {`edited ${updatedMessage}`}
-                </small>
-              )}
+              {!!updatedAt && <small>{`edited ${updatedMessage}`}</small>}
             </div>
             <div className="level-right">
               {edit ? (
-                <span className="icon space-right" onClick={handleUpdateTodo} onKeyPress={handleUpdateTodo}>
+                <span
+                  className="icon space-right"
+                  onClick={handleUpdateTodo}
+                  onKeyPress={handleUpdateTodo}
+                >
                   <FontAwesomeIcon icon={faSave} size="lg" />
                 </span>
               ) : (
-                <span className="icon space-right" onClick={editTodo} onKeyPress={editTodo}>
+                <span
+                  className="icon space-right"
+                  onClick={editTodo}
+                  onKeyPress={editTodo}
+                >
                   <FontAwesomeIcon icon={faPencilAlt} size="lg" />
                 </span>
               )}
               {edit ? (
-                <span className="icon" onClick={cancelEdit} onKeyPress={cancelEdit}>
+                <span
+                  className="icon"
+                  onClick={cancelEdit}
+                  onKeyPress={cancelEdit}
+                >
                   <FontAwesomeIcon icon={faBan} size="lg" />
                 </span>
               ) : (
-                <span className="icon" onClick={openModal} onKeyPress={cancelEdit}>
+                <span
+                  className="icon"
+                  onClick={openModal}
+                  onKeyPress={cancelEdit}
+                >
                   <FontAwesomeIcon icon={faTrashAlt} size="lg" />
                 </span>
               )}
