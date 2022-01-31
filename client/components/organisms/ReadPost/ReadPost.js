@@ -29,16 +29,22 @@ export default function ReadPosts() {
   const currentPost = posts.length == 0 ? { _id: 0 } : posts[index];
   console.log(posts);
   return (
-    <div>
-      <Button onClick={() => setIndex(Math.max(index - 1, 0))}>
-        <img src="/images/left-arrow.png" />
-      </Button>
+    <div id="text-buttons">
+      <img
+        id="arrow-button"
+        src="/images/left-arrow.png"
+        onClick={() => setIndex(Math.max(index - 1, 0))}
+      />
+
       <Box className="readposts">
         <Post key={currentPost._id} {...currentPost} />
       </Box>
-      <Button onClick={() => setIndex(Math.min(index + 1, posts.length - 1))}>
-        <img src="/images/right-arrow.png" />
-      </Button>
+
+      <img
+        id="arrow-button"
+        src="/images/right-arrow.png"
+        onClick={() => setIndex(Math.min(index + 1, posts.length - 1))}
+      />
     </div>
   );
 }
