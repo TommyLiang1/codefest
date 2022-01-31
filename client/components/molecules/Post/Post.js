@@ -79,7 +79,7 @@ export default function Post({
   return (
     <li className="todo box">
       <article className="media">
-        <figure className="media-left">
+        {/* <figure className="media-left">
           <span
             className="icon"
             onClick={toggleCompletePost}
@@ -91,11 +91,11 @@ export default function Post({
               <FontAwesomeIcon icon={faSquare} size="lg" />
             )}
           </span>
-        </figure>
+        </figure> */}
         <div className="media-content">
           <div className="content">
             <p className="saved-text">
-              <small>{`created ${createdMessage}`}</small>
+              <small>{`${createdMessage} `}</small>
             </p>
             {edit ? (
               <textarea
@@ -151,6 +151,11 @@ export default function Post({
           </nav>
         </div>
       </article>
+      <ConfirmModal
+        confirm={confirm}
+        closeModal={closeModal}
+        deletePost={deletePost}
+      />
     </li>
   );
 }
@@ -159,7 +164,7 @@ Post.propTypes = {
   id: PropTypes.string.isRequired,
   user: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
-  tags: PropTypes.string.isRequired,
+  tags: PropTypes.string,
   user_visibility: PropTypes.bool,
   comm_visibility: PropTypes.bool,
   exp_visibility: PropTypes.bool,

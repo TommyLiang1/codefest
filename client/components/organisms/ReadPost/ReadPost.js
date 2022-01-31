@@ -31,7 +31,7 @@ export default function ReadPosts() {
   return (
     <div id="text-buttons">
       <img
-        id="arrow-button"
+        className="arrow-button"
         src="/images/left-arrow.png"
         onClick={() => setIndex(Math.max(index - 1, 0))}
       />
@@ -41,7 +41,7 @@ export default function ReadPosts() {
       </Box>
 
       <img
-        id="arrow-button"
+        className="arrow-button"
         src="/images/right-arrow.png"
         onClick={() => setIndex(Math.min(index + 1, posts.length - 1))}
       />

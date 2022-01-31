@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 
 import Modal from "react-bulma-companion/lib/Modal";
 
-import ConfirmDeleteTodo from "_organisms/ConfirmDeleteTodo";
+import ConfirmDeletePost from "_organisms/ConfirmDeletePost";
 
-export default function ConfirmModal({ confirm, closeModal, deleteTodo }) {
+export default function ConfirmModal({ confirm, closeModal, deletePost }) {
   return (
     <Modal className="confirm-modal" active={confirm}>
       <Modal.Background />
       <Modal.Content>
-        <ConfirmDeleteTodo closeModal={closeModal} deleteTodo={deleteTodo} />
+        <ConfirmDeletePost closeModal={closeModal} deletePost={deletePost} />
       </Modal.Content>
       <Modal.Close size="large" aria-label="close" onClick={closeModal} />
     </Modal>
@@ -20,5 +20,5 @@ export default function ConfirmModal({ confirm, closeModal, deleteTodo }) {
 ConfirmModal.propTypes = {
   confirm: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
-  deleteTodo: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired,
 };

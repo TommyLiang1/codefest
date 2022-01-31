@@ -20,7 +20,7 @@ export const putToggleCompletePost = (info) =>
 export const putPost = (info) =>
   request.put("/api/posts").send(info).then(handleSuccess).catch(handleError);
 
-export const deletePosts = (info) =>
+export const deletePost = (info) =>
   request
     .delete("/api/posts")
     .send(info)

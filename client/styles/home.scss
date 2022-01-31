@@ -11,6 +11,7 @@
 
 img {
   width: 100px;
+  height: 100px;
 }
 
 #respond {
@@ -35,12 +36,24 @@ img {
 }
 
 .readposts {
-  display: inline-flex;
   justify-content: center;
+  background-color: wheat;
 }
 
 .saved-text {
   max-width: 400px;
+  min-width: 400px;
   max-height: 400px;
-  overflow-x: scroll;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+#text-buttons {
+  display: flex;
+}
+
+.arrow-button {
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 100px;
 }
