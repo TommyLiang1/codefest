@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import Modal from 'react-bulma-companion/lib/Modal';
+import Modal from "react-bulma-companion/lib/Modal";
 
-import ConfirmDeleteTodo from '_organisms/ConfirmDeleteTodo';
+import ConfirmDeleteTodo from "_organisms/ConfirmDeleteTodo";
 
 export default function ConfirmModal({ confirm, closeModal, deleteTodo }) {
   return (

@@ -10,12 +10,14 @@ import { faPencilAlt } from "@fortawesome/free-solid-svg-icons/faPencilAlt";
 import { faSave } from "@fortawesome/free-solid-svg-icons/faSave";
 import { faSquare } from "@fortawesome/free-regular-svg-icons/faSquare";
 import { faCheckSquare } from "@fortawesome/free-regular-svg-icons/faCheckSquare";
+import "../../../styles/home.scss";
 
 import {
   attemptToggleCompletePost,
   attemptUpdatePost,
   attemptDeletePost,
 } from "_thunks/posts";
+
 import ConfirmModal from "_organisms/ConfirmModal";
 
 const fromNow = (date) =>
@@ -92,7 +94,7 @@ export default function Post({
         </figure>
         <div className="media-content">
           <div className="content">
-            <p>
+            <p className="saved-text">
               <small>{`created ${createdMessage}`}</small>
             </p>
             {edit ? (
@@ -102,7 +104,7 @@ export default function Post({
                 onChange={updateText}
               />
             ) : (
-              <p>{text}</p>
+              <p className="saved-text"> {text}</p>
             )}
           </div>
 
@@ -162,7 +164,7 @@ Post.propTypes = {
   comm_visibility: PropTypes.bool,
   exp_visibility: PropTypes.bool,
   completed: PropTypes.bool.isRequired,
-  created_at: PropTypes.string.isRequired,
+  created_at: PropTypes.string,
   updated_at: PropTypes.string,
   comments: PropTypes.array.isRequired,
 };

@@ -31,9 +31,7 @@ export default function ReadPost() {
     !loading && (
       <div>
         <div id="lr">
-          <div>
-            <ReadPosts />
-          </div>
+          <ReadPosts />
         </div>
         <button id="respond">Respond</button>
       </div>

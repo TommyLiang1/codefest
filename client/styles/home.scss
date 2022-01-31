@@ -1,8 +1,8 @@
 .home-page {
   font-family: Alice, sans-serif;
   color: rgba(0, 0, 0, 1);
+  display: inline;
 }
-
 #lr {
   margin-top: 100px;
   display: flex;
@@ -31,10 +31,16 @@ img {
   font-size: 2rem;
   margin: auto;
   margin-top: 100px;
-
   justify-content: center;
 }
 
-#readposts {
-  background-color: beige;
+.readposts {
+  display: inline-flex;
+  justify-content: center;
+}
+
+.saved-text {
+  max-width: 400px;
+  max-height: 400px;
+  overflow-x: scroll;
 }
