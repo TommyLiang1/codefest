@@ -27,6 +27,7 @@ export default function ReadPosts() {
   const { user } = useSelector(R.pick(["user"]));
   const { posts } = useSelector(R.pick(["posts"]));
   const currentPost = posts.length == 0 ? { _id: 0 } : posts[index];
+
   console.log(posts);
   return (
     <div id="text-buttons">

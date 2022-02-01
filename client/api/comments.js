@@ -9,10 +9,7 @@ export const postComments = (info) =>
     .catch(handleError);
 
 export const getComments = () =>
-  request
-    .get("/api/comments")
-    .then(handleSuccess)
-    .catch(handleError);
+  request.get("/api/comments").then(handleSuccess).catch(handleError);
 
 export const getUsersComments = (info) =>
   request

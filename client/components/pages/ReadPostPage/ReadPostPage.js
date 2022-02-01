@@ -9,7 +9,7 @@ import Section from "react-bulma-companion/lib/Section";
 import Container from "react-bulma-companion/lib/Container";
 import ReadPosts from "_organisms/ReadPost";
 import { attemptGetPosts } from "_thunks/posts";
-import { attemptGetComments, attemptAddComments } from "_thunks/comments";
+import { attemptGetComments, attemptAddComment } from "_thunks/comments";
 import useKeyPress from "_hooks/useKeyPress";
 
 import "../../../styles/home.scss";
@@ -29,13 +29,13 @@ export default function ReadPost() {
         .then(() => setLoading(false));
     }
   }, []);
-
+  //attemptAddComment(text)
   const handleAddComment = () => {
-    if(text) {
+    if (text) {
       dispatch(attemptAddComment(text));
       setText("");
     }
-  }
+  };
 
   useKeyPress("Enter", handleAddComment);
 
@@ -47,10 +47,17 @@ export default function ReadPost() {
         <div id="lr">
           <ReadPosts />
         </div>
-        <div className = "post">
-          <input className = "textbox" value = {text} placeholder = "Add comment?" onChange = {updateText}/>
+        <div className="post">
+          <input
+            className="textbox"
+            value={text}
+            placeholder="Add comment?"
+            onChange={updateText}
+          />
         </div>
-        <button id="respond" onClick = {handleAddComment}>Respond</button>
+        <button id="respond" onClick={handleAddComment}>
+          Respond
+        </button>
       </div>
     )
   );

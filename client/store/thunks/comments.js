@@ -19,10 +19,10 @@ import { dispatchError } from "_utils/api";
 export const attemptGetComments = () => (dispatch) =>
   getComments()
     .then((data) => {
-      const comment = R.map(
+      const comments = R.map(
         (comment) =>
           R.omit(["Id"], R.assoc("id", comment._id, snakeToCamelCase(comment))),
-        data.comment
+        data.comments
       );
 
       dispatch(setComments(comments));
@@ -31,7 +31,7 @@ export const attemptGetComments = () => (dispatch) =>
     .catch(dispatchError(dispatch));
 
 export const attemptAddComment = (text) => (dispatch) =>
-  postComment({ text })
+  postComments({ text })
     .then((data) => {
       const comment = R.omit(
         ["Id"],
