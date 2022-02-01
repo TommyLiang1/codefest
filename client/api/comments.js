@@ -8,21 +8,23 @@ export const postComments = (info) =>
     .then(handleSuccess)
     .catch(handleError);
 
-export const getComment = () =>
+export const getComments = () =>
   request
     .get("/api/comments")
     .then(handleSuccess)
     .catch(handleError);
 
-export const getUsersComments = () =>
+export const getUsersComments = (info) =>
   request
     .get("/api/comments")
+    .send(info)
     .then(handleSuccess)
     .catch(handleError);
 
-export const getPostsComments = () =>
+export const getPostsComments = (info) =>
   request
     .get("/api/comments")
+    .send(info)
     .then(handleSuccess)
     .catch(handleError);
 
@@ -33,7 +35,7 @@ export const putToggleCompleteComments = (info) =>
     .then(handleSuccess)
     .catch(handleError);
 
-export const putComments = (info) =>
+export const putComment = (info) =>
   request
     .put("/api/comments")
     .send(info)

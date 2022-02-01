@@ -8,7 +8,7 @@ import Container from "react-bulma-companion/lib/Container";
 import { attemptAddPost } from "../../../store/thunks/posts";
 import useKeyPress from "_hooks/useKeyPress";
 
-import "../../../styles/home.scss";
+import "../../../styles/makepost.scss";
 
 export default function MakePost() {
   const dispatch = useDispatch();
@@ -30,10 +30,8 @@ export default function MakePost() {
   return (
     <div>
       <div id="question">Hi {user.usernameCase}, what are you thinking?</div>
-      <div id="lr">
-        <div id="post">
-          <input value={text} onChange={updateText} />
-        </div>
+      <div className = "post">
+        <input className = "textbox" value={text} onChange={updateText} placeholder = "What do you want to post?" />
       </div>
       <button id="respond" onClick={handleAddPost}>
         Add Post
