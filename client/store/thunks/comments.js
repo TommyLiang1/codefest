@@ -4,7 +4,7 @@ import R from "ramda";
 import {
   getComments,
   postComments,
-  putToggleCompleteComments,
+  putToggleCompleteComment,
   putComment,
 } from "_api/comments";
 import {

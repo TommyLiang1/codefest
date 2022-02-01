@@ -20,6 +20,7 @@ import { attemptGetUser, attemptUpdateUser } from "_thunks/user";
 import { attemptUpdatePost } from "_thunks/posts";
 import "../../../styles/home.scss";
 import Post from "_molecules/Post";
+import Comment from "_molecules/Comment";
 
 export default function ReadPosts() {
   const dispatch = useDispatch();
@@ -27,6 +28,9 @@ export default function ReadPosts() {
   const { user } = useSelector(R.pick(["user"]));
   const { posts } = useSelector(R.pick(["posts"]));
   const currentPost = posts.length == 0 ? { _id: 0 } : posts[index];
+
+  const { comments } = useSelector(R.pick(["comments"]));
+  console.log(comments);
 
   console.log(posts);
   return (
@@ -39,6 +43,19 @@ export default function ReadPosts() {
 
       <Box className="readposts">
         <Post key={currentPost._id} {...currentPost} />
+          <Box>
+            {comments ? (
+              <div>
+                Comments
+                {R.reverse(comments).map(comment => <Comment key = {comment._id} {...comment}/>)}
+               </div>
+            ) :
+            (
+              <div>
+                No Comments
+              </div>
+            )}
+          </Box>
       </Box>
 
       <img

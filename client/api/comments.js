@@ -25,7 +25,7 @@ export const getPostsComments = (info) =>
     .then(handleSuccess)
     .catch(handleError);
 
-export const putToggleCompleteComments = (info) =>
+export const putToggleCompleteComment = (info) =>
   request
     .put("/api/comments/complete")
     .send(info)
