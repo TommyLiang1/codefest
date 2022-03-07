@@ -2,6 +2,11 @@
 Description: An anonymous penpal website meant to promote better mental health.
 - [Presentation Link](https://docs.google.com/presentation/d/1p31R0Mo6Jd5KMC4tS8cxgLXVb6kFkMc5dZzhaOyk7eI/edit?usp=sharing)
 - [Figma Link](https://www.figma.com/file/h4r3JSOUUeFSAhyemgWCte/Codefest?node-id=0%3A1)
+
+## Demo Gif:
+
+![](http://g.recordit.co/yHwumlIP5L.gif)
+
 ## Requirements
 
 - Operating System: MacOS or Linux
